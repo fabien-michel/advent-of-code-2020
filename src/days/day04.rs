@@ -69,19 +69,15 @@ fn is_valid_passport(passport_info: &&PassportInfo) -> bool {
     let hgt_caps = hgt_caps.unwrap();
     let hgt_value = hgt_caps[1].parse::<u8>().unwrap();
     let hgt_unit = &hgt_caps[2];
-    match hgt_unit {
-        "cm" => {
-            if !(150..=193).contains(&hgt_value) {
-                return false;
-            }
-        }
-        "in" => {
-            if !(59..=76).contains(&hgt_value) {
-                return false;
-            }
-        }
+    let hgt_range = match hgt_unit {
+        "cm" => (150..=193),
+        "in" => (59..=76),
         _ => return false,
     };
+    if !hgt_range.contains(&hgt_value) {
+        return false;
+    };
+
     let hcl = passport_info.hcl.as_ref().unwrap();
     let hcl_re = Regex::new(r"^#[0-9a-f]{6}$").unwrap();
     if !hcl_re.is_match(hcl.as_str()) {

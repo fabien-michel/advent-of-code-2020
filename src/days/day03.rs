@@ -24,7 +24,11 @@ pub fn day03_02() {
         .collect();
 
     println!("Trees encountered: {:?}", trees_encountered);
-    let prod: u32 = trees_encountered.iter().copied().map(|te| te as u32).product();
+    let prod: u32 = trees_encountered
+        .iter()
+        .copied()
+        .map(|te| te as u32)
+        .product();
 
     println!("Product: {:?}", prod)
 }

@@ -7,7 +7,6 @@ pub fn day02_01() {
     let password_infos = load_password_infos();
 
     let mut valid_passwords_count: u16 = 0;
-    // println!("{:?}", password_infos)
     for password_info in password_infos {
         let mut char_count: u8 = 0;
         for password_char in password_info.password.chars() {
@@ -29,6 +28,7 @@ pub fn day02_02() {
     let mut valid_passwords_count: u32 = 0;
 
     for password_info in password_infos {
+        // println!("{:?}", password_info);
         let password_chars: Vec<char> = password_info.password.chars().collect();
         // if password_info.max as usize > password_chars.len() ||  password_info.min as usize > password_chars.len() {
         //     continue;
@@ -61,16 +61,14 @@ struct PasswordInfo {
 }
 
 fn parse_line(line: String) -> PasswordInfo {
-    // println!("{}", line);
-    let re = Regex::new(r"(\d+)-(\d+) ([a-z]): ([a-z]+)").unwrap();
-    let caps = re.captures(line.as_str()).unwrap();
-    // println!("{:?}", caps);
+    lazy_static! {
+        static ref RE: Regex = Regex::new(r"(\d+)-(\d+) ([a-z]): ([a-z]+)").unwrap();
+    }
+    let caps = RE.captures(line.as_str()).unwrap();
     return PasswordInfo {
         min: caps[1].parse::<u8>().unwrap(),
         max: caps[2].parse::<u8>().unwrap(),
         letter: caps[3].chars().next().unwrap(),
         password: caps[4].to_string(),
     };
-
-    // let re = Regex::new(r"[a-z]+(?:([0-9]+)|([A-Z]+))").unwrap();
 }

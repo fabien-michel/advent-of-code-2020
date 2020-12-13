@@ -51,6 +51,12 @@ pub fn day04_02() {
 }
 
 fn is_valid_passport(passport_info: &&PassportInfo) -> bool {
+    lazy_static! {
+        static ref HGT_RE: Regex = Regex::new(r"^(\d+)(cm|in)$").unwrap();
+        static ref HCL_RE: Regex = Regex::new(r"^#[0-9a-f]{6}$").unwrap();
+        static ref ECL_RE: Regex = Regex::new(r"^(amb|blu|brn|gry|grn|hzl|oth)$").unwrap();
+        static ref PID_RE: Regex = Regex::new(r"^\d{9}$").unwrap();
+    }
     if !(1920..=2002).contains(&passport_info.byr.unwrap()) {
         return false;
     }
@@ -61,8 +67,7 @@ fn is_valid_passport(passport_info: &&PassportInfo) -> bool {
         return false;
     }
     let hgt = passport_info.hgt.as_ref().unwrap();
-    let hgt_re = Regex::new(r"^(\d+)(cm|in)$").unwrap();
-    let hgt_caps = hgt_re.captures(hgt.as_str());
+    let hgt_caps = HGT_RE.captures(hgt.as_str());
     if hgt_caps.is_none() {
         return false;
     }
@@ -79,18 +84,15 @@ fn is_valid_passport(passport_info: &&PassportInfo) -> bool {
     };
 
     let hcl = passport_info.hcl.as_ref().unwrap();
-    let hcl_re = Regex::new(r"^#[0-9a-f]{6}$").unwrap();
-    if !hcl_re.is_match(hcl.as_str()) {
+    if !HCL_RE.is_match(hcl.as_str()) {
         return false;
     }
     let ecl = passport_info.ecl.as_ref().unwrap();
-    let ecl_re = Regex::new(r"^(amb|blu|brn|gry|grn|hzl|oth)$").unwrap();
-    if !ecl_re.is_match(ecl.as_str()) {
+    if !ECL_RE.is_match(ecl.as_str()) {
         return false;
     }
     let pid = passport_info.pid.as_ref().unwrap();
-    let pid_re = Regex::new(r"^\d{9}$").unwrap();
-    if !pid_re.is_match(pid.as_str()) {
+    if !PID_RE.is_match(pid.as_str()) {
         return false;
     }
 

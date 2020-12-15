@@ -28,7 +28,7 @@ pub fn day11_01() {
     let mut previous_occupied_seats = 0;
     loop {
         // print!(".");
-        io::stdout().flush().unwrap();
+        // io::stdout().flush().unwrap();
         let (new_seats_map, occupied_seats) = do_iteration(&seats_map, rules_01);
         seats_map = new_seats_map;
         if occupied_seats == previous_occupied_seats {
@@ -37,7 +37,7 @@ pub fn day11_01() {
         previous_occupied_seats = occupied_seats;
     }
     // print_seats_map(&seats_map);
-    println!("{}", previous_occupied_seats);
+    println!("Occupied seats: {}", previous_occupied_seats);
 }
 
 pub fn day11_02() {
@@ -45,7 +45,8 @@ pub fn day11_02() {
     let mut seats_map = load_seats_map();
     let mut previous_occupied_seats = 0;
     loop {
-        io::stdout().flush().unwrap();
+        // print!(".");
+        // io::stdout().flush().unwrap();
         let (new_seats_map, occupied_seats) = do_iteration(&seats_map, rules_02);
         seats_map = new_seats_map;
         if occupied_seats == previous_occupied_seats {
@@ -53,7 +54,7 @@ pub fn day11_02() {
         }
         previous_occupied_seats = occupied_seats;
     }
-    println!("{}", previous_occupied_seats);
+    println!("Occupied seats: {}", previous_occupied_seats);
 }
 
 fn do_iteration(

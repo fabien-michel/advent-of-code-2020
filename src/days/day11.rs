@@ -132,9 +132,7 @@ fn find_occupied(
             return 0;
         }
         match get_location(seats_map, x, y) {
-            Location::Occupied => {
-                return 1;
-            }
+            Location::Occupied => return 1,
             Location::Empty => return 0,
             _ => {}
         }

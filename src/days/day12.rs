@@ -20,8 +20,8 @@ pub fn day12_01() {
             'S' => y -= instruction.value,
             'E' => x += instruction.value,
             'W' => x -= instruction.value,
-            'L' => orientation = new_orientation(orientation, -instruction.value),
-            'R' => orientation = new_orientation(orientation, instruction.value),
+            'L' => orientation = (orientation - instruction.value) % 360,
+            'R' => orientation = (orientation + instruction.value) % 360,
             'F' => {
                 let (nx, ny) = move_forward(x, y, orientation, instruction.value);
                 x = nx;
@@ -36,17 +36,12 @@ pub fn day12_01() {
     println!("Distance: {}", distance);
 }
 
-fn new_orientation(orientation: isize, degrees: isize) -> isize {
-    let degrees = if degrees < 0 { degrees + 360 } else { degrees };
-    (orientation + degrees) % 360
-}
-
 fn move_forward(x: isize, y: isize, orientation: isize, value: isize) -> (isize, isize) {
     match orientation {
         0 => return (x + value, y),
-        90 => return (x, y - value),
-        180 => return (x - value, y),
-        270 => return (x, y + value),
+        90 | -270 => return (x, y - value),
+        180 | -180 => return (x - value, y),
+        270 | -90 => return (x, y + value),
         _ => panic!(),
     }
 }

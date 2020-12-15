@@ -1,6 +1,5 @@
 use crate::utils::print_day_banner;
 use crate::utils::read_lines;
-use std::io::{self, Write};
 
 #[derive(Debug, PartialEq, Eq, Hash, Copy, Clone)]
 enum Location {

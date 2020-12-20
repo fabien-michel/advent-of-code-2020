@@ -46,10 +46,11 @@ pub fn day16_02() {
 
     let mut fields_matching_names: HashMap<usize, HashSet<&String>> = HashMap::new();
 
-    for ticket in nearby_tickets
+    let valid_nearby_tickets = nearby_tickets
         .iter()
-        .filter(|ticket| !is_ticket_invalid(ticket, &rules))
-    {
+        .filter(|ticket| !is_ticket_invalid(ticket, &rules));
+
+    for ticket in valid_nearby_tickets {
         let ticket_fields_matching_rules = get_ticket_fields_matching_rules(&ticket, &rules);
         let ticket_fields_matching_names: Vec<(usize, Vec<&String>)> = ticket_fields_matching_rules
             .iter()

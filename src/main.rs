@@ -1,6 +1,9 @@
 // use crate::day01::day01;
 #[macro_use] extern crate lazy_static;
 
+use std::time::Instant;
+
+
 mod days;
 mod utils;
 
@@ -16,7 +19,14 @@ fn main() {
     };
 
     for day_run in day_runs {
+
+        let start = Instant::now();
+        
         day_run();
+
+        let elapsed = start.elapsed();
+        
+        println!("\nElapsed time: {:?}", elapsed);
     }
 }
 

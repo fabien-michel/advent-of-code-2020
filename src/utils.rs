@@ -22,6 +22,9 @@ where
 
 
 pub fn print_day_banner(day_num: i32, puzzle_number:i8) {
-    println!("🌲🌲🌲🌲🌲🌲🌲🌲🌲🌲🌲🌲");
-    println!("        Day {}#{}\n", day_num, puzzle_number);
+    println!("\n");
+    println!("🌲🌲🌲🌲🌲🌲🌲🌲🌲🌲🌲");
+    println!("🌲     Day {:02}#{}     🌲", day_num, puzzle_number);
+    println!("🌲🌲🌲🌲🌲🌲🌲🌲🌲🌲🌲");
+    println!("\n");
 }

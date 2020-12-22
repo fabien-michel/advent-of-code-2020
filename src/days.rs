@@ -16,8 +16,9 @@ mod day15;
 mod day16;
 mod day17_01;
 mod day17_02;
+mod day18;
 
-pub const DAYS: [[fn(); 2]; 16] = [
+pub const DAYS: [[fn(); 2]; 18] = [
     [day01::day01_01, day01::day01_02],
     [day02::day02_01, day02::day02_02],
     [day03::day03_01, day03::day03_02],
@@ -35,6 +36,7 @@ pub const DAYS: [[fn(); 2]; 16] = [
     [day15::day15_01, day15::day15_02],
     [day16::day16_01, day16::day16_02],
     [day17_01::day17_01, day17_02::day17_02],
+    [day18::day18_01, day18::day18_02],
 ];
 
 pub fn get_day_runs(day_number: usize, puzzle_number: usize) -> Vec<fn()> {
